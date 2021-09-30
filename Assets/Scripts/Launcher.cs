@@ -4,7 +4,8 @@ using UnityEngine;
 using Photon.Pun;
 
 /// <summary>
-/// Using connecting to photon network server
+/// <para>Using connecting to photon network server</para>
+/// <see href="https://www.youtube.com/playlist?list=PLhsVv9Uw1WzjI8fEBjBQpTyXNZ6Yp1ZLw">See Photon Network Tutorial</see>
 /// </summary>
 public class Launcher : MonoBehaviourPunCallbacks
 {
