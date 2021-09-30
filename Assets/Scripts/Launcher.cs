@@ -13,8 +13,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     /// </summary>
     public override void OnConnectedToMaster()
     {
-        Debug.Log("@Launcher - Connected to Master");
         // base.OnConnectedToMaster();
+        Debug.Log("@Launcher - Connected to Master");
         PhotonNetwork.JoinLobby();
     }
 
@@ -22,6 +22,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         // base.OnJoinedLobby();
         Debug.Log("@Launcher - Joined Lobby");
+        MenuManager.Instance.OpenMenu("title");
     }
 
 
