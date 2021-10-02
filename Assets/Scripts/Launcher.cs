@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using TMPro;
+using Photon.Realtime;
 
 /// <summary>
 /// <para>Using connecting to photon network server</para>
@@ -10,6 +11,13 @@ using TMPro;
 /// </summary>
 public class Launcher : MonoBehaviourPunCallbacks
 {
+    /// <summary>
+    /// Singleton instance
+    /// </summary>
+    public static Launcher Instance;
+
+
+
     /// <summary>
     /// Input component for enter room name
     /// </summary>
@@ -22,6 +30,14 @@ public class Launcher : MonoBehaviourPunCallbacks
     /// Text component for room name
     /// </summary>
     [SerializeField] TMP_Text roomNameText;
+    /// <summary>
+    /// Transform for room list content
+    /// </summary>
+    [SerializeField] Transform roomListContent;
+    /// <summary>
+    /// Object for room list item prefab
+    /// </summary>
+    [SerializeField] GameObject roomListItemPrefab;
 
 
 
@@ -80,6 +96,24 @@ public class Launcher : MonoBehaviourPunCallbacks
     }
 
     /// <summary>
+    /// Event when update room list
+    /// </summary>
+    /// <param name="roomList">Room List</param>
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        // base.OnRoomListUpdate(roomList);
+        Debug.Log("@Launcher - Room List Update");
+        foreach (var transform in roomListContent)
+        {
+            Destroy((transform as Transform).gameObject);
+        }
+        foreach (var item in roomList)
+        {
+            Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().Setup(item);
+        }
+    }
+
+    /// <summary>
     /// Create room
     /// </summary>
     public void CreateRoom()
@@ -98,7 +132,24 @@ public class Launcher : MonoBehaviourPunCallbacks
         MenuManager.Instance.OpenMenu("loading");
     }
 
+    /// <summary>
+    /// Join room
+    /// </summary>
+    /// <param name="info">Room info by photon network</param>
+    public void JoinRoom(RoomInfo info)
+    {
+        PhotonNetwork.JoinRoom(info.Name);
+        MenuManager.Instance.OpenMenu("loading");
+    }
 
+
+
+    /// <summary>
+    /// Instance initialization
+    /// </summary>
+    void Awake() {
+        Instance = this;
+    }
 
     /// <summary>
     /// Start is called before the first frame update
@@ -109,11 +160,4 @@ public class Launcher : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();
     }
 
-    /// <summary>
-    /// Update is called once per frame
-    /// </summary>
-    void Update()
-    {
-
-    }
 }
