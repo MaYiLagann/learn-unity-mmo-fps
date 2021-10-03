@@ -8,25 +8,29 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     /// <summary>
+    /// Gameobject for camera holder
+    /// </summary>
+    [SerializeField] GameObject cameraHolder;
+    /// <summary>
     /// Sensitivity of mouse movement
     /// </summary>
-    [SerializeField] float mouseSensitivity;
+    [SerializeField] float mouseSensitivity = 1f;
     /// <summary>
     /// Speed of sprint
     /// </summary>
-    [SerializeField] float sprintSpeed;
+    [SerializeField] float sprintSpeed = 1f;
     /// <summary>
     /// Speed of walk
     /// </summary>
-    [SerializeField] float walkSpeed;
+    [SerializeField] float walkSpeed = 1f;
     /// <summary>
     /// Force of jump
     /// </summary>
-    [SerializeField] float jumpForce;
+    [SerializeField] float jumpForce = 1f;
     /// <summary>
     /// Time for smooth
     /// </summary>
-    [SerializeField] float smoothTime;
+    [SerializeField] float smoothTime = 1f;
 
 
 
@@ -55,6 +59,17 @@ public class PlayerController : MonoBehaviour
 
 
     /// <summary>
+    /// Set grounded state
+    /// </summary>
+    /// <param name="grounded">Is grounded?</param>
+    public void SetGroundedState(bool grounded)
+    {
+        this.grounded = grounded;
+    }
+
+
+
+    /// <summary> 
     /// Instance initialization 
     /// </summary>
     void Awake()
@@ -67,6 +82,54 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Update()
     {
+        Look();
+        Move();
+        Jump();
+    }
+
+    /// <summary>
+    /// Update per frame for physics calculations
+    /// </summary>
+    void FixedUpdate()
+    {
+        rigidbody.MovePosition(rigidbody.position + transform.TransformDirection(moveAmount) * Time.fixedDeltaTime);
+    }
+
+
+
+    /// <summary>
+    /// Move player transform by key input
+    /// </summary>
+    private void Move()
+    {
+        Vector3 moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+
+        moveAmount = Vector3.SmoothDamp(moveAmount, moveDirection * (Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed), ref smoothMoveVelocity, smoothTime);
+    }
+
+    /// <summary>
+    /// Jump player by key input
+    /// </summary>
+    private void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && grounded)
+        {
+            rigidbody.AddForce(transform.up * jumpForce);
+        }
+    }
+
+    /// <summary>
+    /// Rotate player camera by mouse move
+    /// </summary>
+    private void Look()
+    {
+        // Rotate character axis Y
         transform.Rotate(Vector3.up * Input.GetAxisRaw("Mouse X") * mouseSensitivity);
+
+        // Rotate character axis X
+        verticalLookRotation += Input.GetAxisRaw("Mouse Y") * mouseSensitivity;
+        verticalLookRotation = Mathf.Clamp(verticalLookRotation, -90f, 90f);
+
+        cameraHolder.transform.localEulerAngles = Vector3.left * verticalLookRotation;
     }
 }
