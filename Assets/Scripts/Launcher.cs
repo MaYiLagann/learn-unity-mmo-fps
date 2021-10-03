@@ -46,6 +46,10 @@ public class Launcher : MonoBehaviourPunCallbacks
     /// Object for player list item prefab
     /// </summary>
     [SerializeField] GameObject playerListItemPrefab;
+    /// <summary>
+    /// Object for start game button
+    /// </summary>
+    [SerializeField, Header("Start Game")] GameObject startGameButton;
 
 
 
@@ -57,6 +61,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         // base.OnConnectedToMaster();
         Debug.Log("@Launcher - Connected to Master");
         PhotonNetwork.JoinLobby();
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     /// <summary>
@@ -87,6 +92,18 @@ public class Launcher : MonoBehaviourPunCallbacks
         {
             Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().Setup(player);
         }
+
+        startGameButton.SetActive(PhotonNetwork.IsMasterClient);
+    }
+
+    /// <summary>
+    /// Event when master client switched
+    /// </summary>
+    /// <param name="newMasterClient">New master client</param>
+    public override void OnMasterClientSwitched(Player newMasterClient)
+    {
+        // base.OnMasterClientSwitched(newMasterClient);
+        startGameButton.SetActive(PhotonNetwork.IsMasterClient);
     }
 
     /// <summary>
@@ -177,6 +194,14 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         Debug.Log("@Launcher - Set Player Name: " + inputField.text);
         PhotonNetwork.NickName = inputField.text;
+    }
+
+    /// <summary>
+    /// Start game
+    /// </summary>
+    public void StartGame()
+    {
+        PhotonNetwork.LoadLevel(1);
     }
 
 
