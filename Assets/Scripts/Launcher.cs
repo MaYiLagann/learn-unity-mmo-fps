@@ -66,7 +66,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         // base.OnJoinedLobby();
         Debug.Log("@Launcher - Joined Lobby");
-        MenuManager.Instance.OpenMenu("title"); 
+        MenuManager.Instance.OpenMenu("title");
     }
 
     /// <summary>
@@ -78,6 +78,15 @@ public class Launcher : MonoBehaviourPunCallbacks
         Debug.Log("@Launcher - Joined Room");
         MenuManager.Instance.OpenMenu("room");
         roomNameText.text = PhotonNetwork.CurrentRoom.Name;
+
+        foreach (var transform in playerListContent)
+        {
+            Destroy((transform as Transform).gameObject);
+        }
+        foreach (var player in PhotonNetwork.PlayerList)
+        {
+            Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().Setup(player);
+        }
     }
 
     /// <summary>
