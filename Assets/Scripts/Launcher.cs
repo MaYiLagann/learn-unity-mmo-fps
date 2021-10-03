@@ -143,7 +143,8 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
         foreach (var item in roomList)
         {
-            Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().Setup(item);
+            if (!item.RemovedFromList)
+                Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().Setup(item);
         }
     }
 
