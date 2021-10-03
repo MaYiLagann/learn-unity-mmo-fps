@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// Self rigidbody
     /// </summary>
-    Rigidbody rigidbody;
+    new Rigidbody rigidbody;
 
 
 
