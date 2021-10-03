@@ -21,7 +21,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     /// <summary>
     /// Input component for enter room name
     /// </summary>
-    [SerializeField] TMP_InputField roomNameInputField;
+    [SerializeField, Header("Texts")] TMP_InputField roomNameInputField;
     /// <summary>
     /// Text component for error
     /// </summary>
@@ -33,11 +33,19 @@ public class Launcher : MonoBehaviourPunCallbacks
     /// <summary>
     /// Transform for room list content
     /// </summary>
-    [SerializeField] Transform roomListContent;
+    [SerializeField, Header("Room List")] Transform roomListContent;
     /// <summary>
     /// Object for room list item prefab
     /// </summary>
     [SerializeField] GameObject roomListItemPrefab;
+    /// <summary>
+    /// Transform for player list content
+    /// </summary>
+    [SerializeField, Header("Player List")] Transform playerListContent;
+    /// <summary>
+    /// Object for player list item prefab
+    /// </summary>
+    [SerializeField] GameObject playerListItemPrefab;
 
 
 
@@ -58,7 +66,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         // base.OnJoinedLobby();
         Debug.Log("@Launcher - Joined Lobby");
-        MenuManager.Instance.OpenMenu("title");
+        MenuManager.Instance.OpenMenu("title"); 
     }
 
     /// <summary>
@@ -114,7 +122,17 @@ public class Launcher : MonoBehaviourPunCallbacks
     }
 
     /// <summary>
-    /// Create room
+    /// Event when player entered room
+    /// </summary>
+    /// <param name="newPlayer">New player</param>
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        // base.OnPlayerEnteredRoom(newPlayer);
+        Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().Setup(newPlayer);
+    }
+
+    /// <summary>
+    /// /// Create room
     /// </summary>
     public void CreateRoom()
     {
@@ -142,12 +160,23 @@ public class Launcher : MonoBehaviourPunCallbacks
         MenuManager.Instance.OpenMenu("loading");
     }
 
+    /// <summary>
+    /// Set player nickname
+    /// </summary>
+    /// <param name="inputField">Input field for enter nickname</param>
+    public void SetPlayerName(TMP_InputField inputField)
+    {
+        Debug.Log("@Launcher - Set Player Name: " + inputField.text);
+        PhotonNetwork.NickName = inputField.text;
+    }
+
 
 
     /// <summary>
     /// Instance initialization
     /// </summary>
-    void Awake() {
+    void Awake()
+    {
         Instance = this;
     }
 
