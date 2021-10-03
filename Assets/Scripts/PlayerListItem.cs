@@ -5,6 +5,9 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 
+/// <summary>
+/// Class for PlayerListItem prefab
+/// </summary>
 public class PlayerListItem : MonoBehaviourPunCallbacks
 {
     /// <summary>

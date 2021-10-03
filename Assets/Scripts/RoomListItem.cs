@@ -4,6 +4,9 @@ using UnityEngine;
 using Photon.Realtime;
 using TMPro;
 
+/// <summary>
+/// Class for RoomListItem prefab
+/// </summary>
 public class RoomListItem : MonoBehaviour
 {
     /// <summary>

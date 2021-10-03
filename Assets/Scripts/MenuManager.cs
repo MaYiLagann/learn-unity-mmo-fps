@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manager class for view menu
+/// </summary>
 public class MenuManager : MonoBehaviour
 {
     /// <summary>

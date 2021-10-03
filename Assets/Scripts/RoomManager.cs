@@ -5,6 +5,9 @@ using Photon.Pun;
 using UnityEngine.SceneManagement;
 using System.IO;
 
+/// <summary>
+/// Manager class for room
+/// </summary>
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     /// <summary>
