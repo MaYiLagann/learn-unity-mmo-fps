@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 /// <summary>
 /// Class for player object controll
@@ -55,7 +56,10 @@ public class PlayerController : MonoBehaviour
     /// Self rigidbody
     /// </summary>
     new Rigidbody rigidbody;
-
+    /// <summary>
+    /// Self photon view
+    /// </summary>
+    PhotonView photonView;
 
 
     /// <summary>
@@ -75,6 +79,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
+        photonView = GetComponent<PhotonView>();
     }
 
     /// <summary>
@@ -82,9 +87,12 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Update()
     {
-        Look();
-        Move();
-        Jump();
+        if (photonView.IsMine)
+        {
+            Look();
+            Move();
+            Jump();
+        }
     }
 
     /// <summary>
