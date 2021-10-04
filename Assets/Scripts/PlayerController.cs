@@ -83,6 +83,17 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
+    /// Start is called before the first frame update
+    /// </summary>
+    void Start()
+    {
+        if (!photonView.IsMine)
+        {
+            Destroy(GetComponentInChildren<Camera>().gameObject);
+        }
+    }
+
+    /// <summary>
     /// Update is called once per frame
     /// </summary>
     void Update()
