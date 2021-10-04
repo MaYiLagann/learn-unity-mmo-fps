@@ -90,6 +90,7 @@ public class PlayerController : MonoBehaviour
         if (!photonView.IsMine)
         {
             Destroy(GetComponentInChildren<Camera>().gameObject);
+            Destroy(rigidbody);
         }
     }
 
@@ -111,7 +112,10 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
-        rigidbody.MovePosition(rigidbody.position + transform.TransformDirection(moveAmount) * Time.fixedDeltaTime);
+        if (photonView.IsMine)
+        {
+            rigidbody.MovePosition(rigidbody.position + transform.TransformDirection(moveAmount) * Time.fixedDeltaTime);
+        }
     }
 
 
