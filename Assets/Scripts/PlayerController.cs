@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
 /// <summary>
 /// Class for player object controll
 /// </summary>
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviourPunCallbacks
 {
     /// <summary>
     /// Gameobject for camera holder
@@ -71,7 +72,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// Self photon view
     /// </summary>
-    PhotonView photonView;
+    new PhotonView photonView;
 
 
     /// <summary>
@@ -81,6 +82,20 @@ public class PlayerController : MonoBehaviour
     public void SetGroundedState(bool grounded)
     {
         this.grounded = grounded;
+    }
+
+    /// <summary>
+    /// Event when updated player properties
+    /// </summary>
+    /// <param name="targetPlayer">Target player</param>
+    /// <param name="changedProps">Changed properties</param>
+    public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
+    {
+        // base.OnPlayerPropertiesUpdate(targetPlayer, changedProps);
+        if (!photonView.IsMine && targetPlayer == photonView.Owner)
+        {
+            EquipItem((int)changedProps["ItemIndex"]);
+        }
     }
 
 
@@ -215,5 +230,12 @@ public class PlayerController : MonoBehaviour
             items[prevItemIndex].itemGameObject.SetActive(false);
         }
         prevItemIndex = itemIndex;
+
+        if (photonView.IsMine)
+        {
+            ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
+            hashtable.Add("ItemIndex", itemIndex);
+            PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
+        }
     }
 }
