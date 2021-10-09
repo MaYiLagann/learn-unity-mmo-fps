@@ -136,6 +136,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
             Move();
             Jump();
             ChangeItem();
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                items[itemIndex].Use();
+            }
         }
     }
 

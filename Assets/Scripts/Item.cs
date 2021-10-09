@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Item
 /// </summary>
-public class Item : MonoBehaviour
+public abstract class Item : MonoBehaviour
 {
     /// <summary>
     /// Item information
@@ -15,4 +15,9 @@ public class Item : MonoBehaviour
     /// GameObject for item
     /// </summary>
     public GameObject itemGameObject;
+
+    /// <summary>
+    /// Using item
+    /// </summary>
+    public abstract void Use();
 }

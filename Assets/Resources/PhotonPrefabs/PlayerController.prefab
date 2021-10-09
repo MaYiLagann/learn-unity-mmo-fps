@@ -176,8 +176,8 @@ MonoBehaviour:
   jumpForce: 300
   smoothTime: 0.15
   items:
-  - {fileID: 6628395666599652365}
-  - {fileID: 4829181010877844660}
+  - {fileID: 7172466597674934139}
+  - {fileID: 5647934033248575005}
 --- !u!1 &1506643070893386253
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +290,7 @@ Transform:
   m_LocalPosition: {x: 0.26, y: 0, z: 0.75}
   m_LocalScale: {x: 0.14, y: 0.14, z: 1.5}
   m_Children: []
-  m_Father: {fileID: 5915343652825079873}
+  m_Father: {fileID: 4431683999323454285}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &172217171060375793
@@ -351,9 +351,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5809775891076109213}
-  - component: {fileID: 4829181010877844660}
+  - component: {fileID: 5647934033248575005}
   m_Layer: 0
-  m_Name: Gun2Item
+  m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -374,7 +374,7 @@ Transform:
   m_Father: {fileID: 8621324542861499067}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4829181010877844660
+--- !u!114 &5647934033248575005
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -383,7 +383,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3655142168889452101}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c39768c19e7308b4cb6d993e386e6907, type: 3}
+  m_Script: {fileID: 11500000, guid: 1204e84996d323c4d8bc46601404d00d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemInfo: {fileID: 11400000, guid: caf37c9129c30b64fb0def66c755713a, type: 2}
@@ -486,9 +486,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9038703411057764815}
-  - component: {fileID: 6628395666599652365}
+  - component: {fileID: 7172466597674934139}
   m_Layer: 0
-  m_Name: Gun1Item
+  m_Name: Rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -509,7 +509,7 @@ Transform:
   m_Father: {fileID: 8621324542861499067}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6628395666599652365
+--- !u!114 &7172466597674934139
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -518,7 +518,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5609928107267904084}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c39768c19e7308b4cb6d993e386e6907, type: 3}
+  m_Script: {fileID: 11500000, guid: 1204e84996d323c4d8bc46601404d00d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemInfo: {fileID: 11400000, guid: 15e39d7fa8604f041adc10301a4fb8b7, type: 2}
@@ -533,7 +533,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5915343652825079873}
   m_Layer: 0
-  m_Name: Gun2
+  m_Name: Pistol Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -550,7 +550,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7727307563706647860}
+  - {fileID: 500497752447756450}
   m_Father: {fileID: 5809775891076109213}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -579,11 +579,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6566582686291791223}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.26, y: 0, z: 0.5}
   m_LocalScale: {x: 0.28, y: 0.23, z: 1}
   m_Children: []
-  m_Father: {fileID: 4431683999323454285}
+  m_Father: {fileID: 5915343652825079873}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &861713390172967807
@@ -645,7 +645,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4431683999323454285}
   m_Layer: 0
-  m_Name: Gun1
+  m_Name: Rifle Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -662,7 +662,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 500497752447756450}
+  - {fileID: 7727307563706647860}
   m_Father: {fileID: 9038703411057764815}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -676,7 +676,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8621324542861499067}
   m_Layer: 0
-  m_Name: ItemHolder
+  m_Name: Item Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
