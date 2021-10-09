@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// Index of current item
     /// </summary>
-    int itemIndex;
+    int itemIndex = -1;
     /// <summary>
     /// Index of previous item
     /// </summary>
@@ -120,6 +120,15 @@ public class PlayerController : MonoBehaviour
             Look();
             Move();
             Jump();
+
+            for (int i = 0; i < items.Length; i++)
+            {
+                if (Input.GetKeyDown((i + 1).ToString()))
+                {
+                    EquipItem(i);
+                    break;
+                }
+            }
         }
     }
 
@@ -178,6 +187,8 @@ public class PlayerController : MonoBehaviour
     /// <param name="index">Index of item list</param>
     private void EquipItem(int index)
     {
+        if (index == itemIndex) return;
+
         itemIndex = index;
 
         items[itemIndex].itemGameObject.SetActive(true);
