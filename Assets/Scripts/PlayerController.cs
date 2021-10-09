@@ -120,15 +120,7 @@ public class PlayerController : MonoBehaviour
             Look();
             Move();
             Jump();
-
-            for (int i = 0; i < items.Length; i++)
-            {
-                if (Input.GetKeyDown((i + 1).ToString()))
-                {
-                    EquipItem(i);
-                    break;
-                }
-            }
+            ChangeItem();
         }
     }
 
@@ -179,6 +171,32 @@ public class PlayerController : MonoBehaviour
         verticalLookRotation = Mathf.Clamp(verticalLookRotation, -90f, 90f);
 
         cameraHolder.transform.localEulerAngles = Vector3.left * verticalLookRotation;
+    }
+
+    /// <summary>
+    /// Change players item by input number key or mouse scroll
+    /// </summary>
+    private void ChangeItem()
+    {
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (Input.GetKeyDown((i + 1).ToString()))
+            {
+                EquipItem(i);
+                break;
+            }
+        }
+
+        if (Input.GetAxisRaw("Mouse ScrollWheel") > 0)
+        {
+            if (itemIndex < items.Length - 1)
+                EquipItem(itemIndex + 1);
+        }
+        else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0)
+        {
+            if (itemIndex > 0)
+                EquipItem(itemIndex - 1);
+        }
     }
 
     /// <summary>
