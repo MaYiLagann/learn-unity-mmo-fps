@@ -33,7 +33,7 @@ public class SingleShotGun : Gun
         ray.origin = camera.transform.position;
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            Debug.Log("We hit: " + hit.collider.gameObject.name);
+            hit.collider.gameObject.GetComponent<IDamagable>()?.TakeDamage(((GunInfo)itemInfo).damage);
         }
     }
 }

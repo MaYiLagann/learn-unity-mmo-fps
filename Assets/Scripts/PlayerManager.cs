@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using System.IO;
+using System;
 
 /// <summary>
 /// Manager class for player controller
@@ -13,6 +14,21 @@ public class PlayerManager : MonoBehaviour
     /// Photon view
     /// </summary>
     PhotonView photonView;
+    /// <summary>
+    /// Controller
+    /// </summary>
+    GameObject controller;
+
+
+
+    /// <summary>
+    /// Player die
+    /// </summary>
+    public void Die()
+    {
+        PhotonNetwork.Destroy(controller);
+        CreateController();
+    }
 
 
 
@@ -41,6 +57,6 @@ public class PlayerManager : MonoBehaviour
     void CreateController()
     {
         Debug.Log("@PlayerManager - Create Controller");
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerController"), Vector3.zero, Quaternion.identity);
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerController"), Vector3.zero, Quaternion.identity, 0, new object[] { photonView.ViewID });
     }
 }

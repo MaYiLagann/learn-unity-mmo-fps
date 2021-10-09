@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using System;
 
 /// <summary>
 /// Class for player object controll
 /// </summary>
-public class PlayerController : MonoBehaviourPunCallbacks
+public class PlayerController : MonoBehaviourPunCallbacks, IDamagable
 {
     /// <summary>
     /// Gameobject for camera holder
@@ -73,6 +74,20 @@ public class PlayerController : MonoBehaviourPunCallbacks
     /// Self photon view
     /// </summary>
     new PhotonView photonView;
+    /// <summary>
+    /// Player manager
+    /// </summary>
+    PlayerManager playerManager;
+
+    /// <summary>
+    /// Point of max health
+    /// </summary>
+    const float maxHealth = 100f;
+    /// <summary>
+    /// Point of current health
+    /// </summary>
+    float currentHealth = maxHealth;
+
 
 
     /// <summary>
@@ -82,6 +97,15 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public void SetGroundedState(bool grounded)
     {
         this.grounded = grounded;
+    }
+
+    /// <summary>
+    /// Take the damage
+    /// </summary>
+    /// <param name="damage">Point of damage</param>
+    public void TakeDamage(float damage)
+    {
+        photonView.RPC("RpcTakeDamage", RpcTarget.All, damage);
     }
 
     /// <summary>
@@ -107,6 +131,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     {
         rigidbody = GetComponent<Rigidbody>();
         photonView = GetComponent<PhotonView>();
+        playerManager = PhotonView.Find((int)photonView.InstantiationData[0]).GetComponent<PlayerManager>();
     }
 
     /// <summary>
@@ -152,6 +177,24 @@ public class PlayerController : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             rigidbody.MovePosition(rigidbody.position + transform.TransformDirection(moveAmount) * Time.fixedDeltaTime);
+        }
+    }
+
+    /// <summary>
+    /// RPC, Take the damage
+    /// </summary>
+    /// <param name="damage"></param>
+    [PunRPC]
+    void RpcTakeDamage(float damage)
+    {
+        if (photonView.IsMine)
+        {
+            currentHealth -= damage;
+
+            if (currentHealth <= 0)
+            {
+                playerManager.Die();
+            }
         }
     }
 
