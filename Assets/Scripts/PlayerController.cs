@@ -32,9 +32,21 @@ public class PlayerController : MonoBehaviour
     /// Time for smooth
     /// </summary>
     [SerializeField] float smoothTime = 1f;
+    /// <summary>
+    /// Item list
+    /// </summary>
+    [SerializeField] Item[] items;
 
 
 
+    /// <summary>
+    /// Index of current item
+    /// </summary>
+    int itemIndex;
+    /// <summary>
+    /// Index of previous item
+    /// </summary>
+    int prevItemIndex = -1;
     /// <summary>
     /// Vertical Look Rotation
     /// </summary>
@@ -87,7 +99,11 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Start()
     {
-        if (!photonView.IsMine)
+        if (photonView.IsMine)
+        {
+            EquipItem(0);
+        }
+        else
         {
             Destroy(GetComponentInChildren<Camera>().gameObject);
             Destroy(rigidbody);
@@ -154,5 +170,21 @@ public class PlayerController : MonoBehaviour
         verticalLookRotation = Mathf.Clamp(verticalLookRotation, -90f, 90f);
 
         cameraHolder.transform.localEulerAngles = Vector3.left * verticalLookRotation;
+    }
+
+    /// <summary>
+    /// Equip the item
+    /// </summary>
+    /// <param name="index">Index of item list</param>
+    private void EquipItem(int index)
+    {
+        itemIndex = index;
+
+        items[itemIndex].itemGameObject.SetActive(true);
+        if (prevItemIndex > -1)
+        {
+            items[prevItemIndex].itemGameObject.SetActive(false);
+        }
+        prevItemIndex = itemIndex;
     }
 }
