@@ -8,10 +8,32 @@ using UnityEngine;
 public class SingleShotGun : Gun
 {
     /// <summary>
+    /// Camera from player
+    /// </summary>
+    [SerializeField] new Camera camera;
+
+
+
+    /// <summary>
     /// Using single shot gun
     /// </summary>
     public override void Use()
     {
-        Debug.Log("Using gun: " + itemInfo.itemName);
+        Shoot();
+    }
+
+
+
+    /// <summary>
+    /// Shoot the gun
+    /// </summary>
+    private void Shoot()
+    {
+        Ray ray = camera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
+        ray.origin = camera.transform.position;
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            Debug.Log("We hit: " + hit.collider.gameObject.name);
+        }
     }
 }
