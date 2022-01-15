@@ -1,15 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
 using Photon.Pun;
 using Photon.Realtime;
-using System;
 
 /// <summary>
 /// Class for player object controll
 /// </summary>
 public class PlayerController : MonoBehaviourPunCallbacks, IDamagable
 {
+    /// <summary>
+    /// Event handler for take damage
+    /// </summary>
+    /// <typeparam name="float">Changed current health</typeparam>
+    public UnityAction<float> onTakeDamage;
+
+
+
     /// <summary>
     /// Gameobject for camera holder
     /// </summary>
@@ -38,6 +47,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamagable
     /// Item list
     /// </summary>
     [SerializeField] Item[] items;
+
+    /// <summary>
+    /// Health bar gauge image
+    /// </summary>
+    [SerializeField] Image healthGaugeImage;
 
 
 
@@ -124,18 +138,30 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamagable
 
 
 
-    /// <summary> 
-    /// Instance initialization 
+    /// <summary>
+    /// Awake is called when the script instance is being loaded
     /// </summary>
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
         photonView = GetComponent<PhotonView>();
         playerManager = PhotonView.Find((int)photonView.InstantiationData[0]).GetComponent<PlayerManager>();
+
+        // Subscribe event 'TakeDamage'
+        onTakeDamage += (health) =>
+        {
+            if (healthGaugeImage)
+            {
+                var scale = healthGaugeImage.transform.localScale;
+                scale.x = health / maxHealth;
+                healthGaugeImage.transform.localScale = scale;
+            }
+        };
     }
 
     /// <summary>
-    /// Start is called before the first frame update
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time
     /// </summary>
     void Start()
     {
@@ -151,7 +177,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamagable
     }
 
     /// <summary>
-    /// Update is called once per frame
+    /// Update is called every frame, if the MonoBehaviour is enabled
     /// </summary>
     void Update()
     {
@@ -176,7 +202,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamagable
     }
 
     /// <summary>
-    /// Update per frame for physics calculations
+    /// This function is called every fixed framerate frame, if the MonoBehaviour is enabled
     /// </summary>
     void FixedUpdate()
     {
@@ -196,6 +222,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamagable
         if (photonView.IsMine)
         {
             currentHealth -= damage;
+
+            onTakeDamage.Invoke(currentHealth);
 
             if (currentHealth <= 0)
             {
