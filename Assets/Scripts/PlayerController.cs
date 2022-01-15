@@ -9,6 +9,7 @@ using Photon.Realtime;
 /// <summary>
 /// Class for player object controll
 /// </summary>
+[RequireComponent(typeof(PhotonView))]
 public class PlayerController : MonoBehaviourPunCallbacks, IDamagable
 {
     /// <summary>
