@@ -413,6 +413,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5809775891076109213}
   - component: {fileID: 5647934033248575005}
+  - component: {fileID: 5003828172793688757}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -450,6 +451,28 @@ MonoBehaviour:
   itemInfo: {fileID: 11400000, guid: caf37c9129c30b64fb0def66c755713a, type: 2}
   itemGameObject: {fileID: 5955445323311303921}
   camera: {fileID: 1506643070893386250}
+--- !u!114 &5003828172793688757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3655142168889452101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &4029104456338103763
 GameObject:
   m_ObjectHideFlags: 0
@@ -549,6 +572,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9038703411057764815}
   - component: {fileID: 7172466597674934139}
+  - component: {fileID: 6750574085540804235}
   m_Layer: 0
   m_Name: Rifle
   m_TagString: Untagged
@@ -586,6 +610,28 @@ MonoBehaviour:
   itemInfo: {fileID: 11400000, guid: 15e39d7fa8604f041adc10301a4fb8b7, type: 2}
   itemGameObject: {fileID: 6598201169442178726}
   camera: {fileID: 1506643070893386250}
+--- !u!114 &6750574085540804235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5609928107267904084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &5955445323311303921
 GameObject:
   m_ObjectHideFlags: 0
