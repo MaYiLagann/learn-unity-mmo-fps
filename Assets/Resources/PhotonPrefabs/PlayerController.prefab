@@ -290,6 +290,7 @@ MonoBehaviour:
   items:
   - {fileID: 7172466597674934139}
   - {fileID: 5647934033248575005}
+  canvas: {fileID: 3233025359178555172}
   healthGaugeImage: {fileID: 1143705695265075804}
 --- !u!1 &1506643070893386253
 GameObject:

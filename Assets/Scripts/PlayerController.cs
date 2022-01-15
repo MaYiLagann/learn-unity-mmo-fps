@@ -49,6 +49,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamagable
     [SerializeField] Item[] items;
 
     /// <summary>
+    /// Canvas for drawing UI elements
+    /// </summary>
+    [SerializeField] Canvas canvas;
+    /// <summary>
     /// Health bar gauge image
     /// </summary>
     [SerializeField] Image healthGaugeImage;
@@ -173,6 +177,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamagable
         {
             Destroy(GetComponentInChildren<Camera>().gameObject);
             Destroy(rigidbody);
+            if (canvas) Destroy(canvas.gameObject);
         }
     }
 
