@@ -51,13 +51,30 @@ public class SingleShotGun : Gun
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             hit.collider.gameObject.GetComponent<IDamagable>()?.TakeDamage(((GunInfo)itemInfo).damage);
-            photonView.RPC("RpcShoot", RpcTarget.All, hit.point);
+            photonView.RPC("RpcShoot", RpcTarget.All, hit.point, hit.normal);
         }
     }
 
+    /// <summary>
+    /// RPC, Shoot the gun (to make a bullet impact effect)
+    /// </summary>
+    /// <param name="hitPosition">Position of bullet hit</param>
+    /// <param name="hitNormal">Normal of bullet hit surface</param>
     [PunRPC]
-    private void RpcShoot(Vector3 hitPosition)
+    private void RpcShoot(Vector3 hitPosition, Vector3 hitNormal)
     {
-        Debug.Log(hitPosition);
+        var colliders = Physics.OverlapSphere(hitPosition, 0.3f);
+        if (colliders.Length > 0)
+        {
+            var bulletImpactObject = Instantiate(
+                bulletImpactPrefab,
+                hitPosition + hitNormal * 0.0001f,
+                Quaternion.LookRotation(hitNormal, Vector3.up) * bulletImpactPrefab.transform.rotation
+            );
+
+            bulletImpactObject.transform.SetParent(colliders[0].transform);
+
+            Destroy(bulletImpactObject, 10f);
+        }
     }
 }

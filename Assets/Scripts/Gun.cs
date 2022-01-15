@@ -11,4 +11,9 @@ public abstract class Gun : Item
     /// Using gun item
     /// </summary>
     public abstract override void Use();
+
+    /// <summary>
+    /// Prefab for bullet impact effect
+    /// </summary>
+    public GameObject bulletImpactPrefab;
 }
