@@ -175,14 +175,14 @@ Project Link: [https://github.com/MaYiLagann/FirstShooterGame](https://github.co
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/MaYiLagann/FirstShooterGame.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/MaYiLagann/FirstShooterGame?style=for-the-badge
 [contributors-url]: https://github.com/MaYiLagann/FirstShooterGame/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/MaYiLagann/FirstShooterGame.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/MaYiLagann/FirstShooterGame?style=for-the-badge
 [forks-url]: https://github.com/MaYiLagann/FirstShooterGame/network/members
-[stars-shield]: https://img.shields.io/github/stars/MaYiLagann/FirstShooterGame.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/MaYiLagann/FirstShooterGame?style=for-the-badge
 [stars-url]: https://github.com/MaYiLagann/FirstShooterGame/stargazers
-[issues-shield]: https://img.shields.io/github/issues/MaYiLagann/FirstShooterGame.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/MaYiLagann/FirstShooterGame?style=for-the-badge
 [issues-url]: https://github.com/MaYiLagann/FirstShooterGame/issues
-[license-shield]: https://img.shields.io/github/license/MaYiLagann/FirstShooterGame.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/MaYiLagann/FirstShooterGame?style=for-the-badge
 [license-url]: https://github.com/MaYiLagann/FirstShooterGame/blob/master/LICENSE.txt
 [product-screenshot]: ReadmeImages/screenshot.png
